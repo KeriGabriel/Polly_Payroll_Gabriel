@@ -6,35 +6,32 @@ using System.Threading.Tasks;
 
 namespace Polly_Payroll_Gabriel
 {
-    internal class Employee : IPayable
-    {
+	internal class Employee : IPayable
+	{
 		private string _firstName;
 		private string _lastName;
-        private string _SSNumber;
-        private decimal _earnings;
+		private string _SSNumber;
+		private decimal _earnings;
 		private string _payrollType;
-        //private string _payrollType;
-
-        public Employee(string firstName, string lastName, string SSNumber, IPayable.PayrollType payrollType)
+		public virtual decimal GetPayableAmount => _earnings;
+        public string GetledgerType => _payrollType;
+        public Employee(string firstName, string lastName,
+			string SSNumber, IPayable.PayrollType payrollType)
 		{
 			_firstName = firstName;
 			_lastName = lastName;
 			_SSNumber = SSNumber;
-			_payrollType = payrollType.ToString();
-
-        }		
-		public decimal Earnings
-		{
-			get { return _earnings; }
-			set { _earnings = value; }
-		}
-
-		public decimal GetPayableAmount => _earnings;
-
-
-		public string GetledgerType => _payrollType;
-
-
+			_payrollType = payrollType.ToString();          
+        }
+        public Employee(string firstName, string lastName,
+            string SSNumber, IPayable.PayrollType payrollType, decimal earnings)
+        {
+            _firstName = firstName;
+            _lastName = lastName;
+            _SSNumber = SSNumber;
+            _payrollType = payrollType.ToString();
+            _earnings = earnings;
+        }
         public override string ToString()
 		{
 			return

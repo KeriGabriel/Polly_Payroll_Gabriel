@@ -16,8 +16,8 @@ namespace Polly_Payroll_Gabriel
         private string _invoiceNumber;
         private string _ledgerType;
 
-        public decimal GetPayableAmount => _extendedPrice;
 
+        public decimal GetPayableAmount => _extendedPrice;
         public string GetledgerType => _ledgerType;
 
         public	InvoiceItem(string PartNumber, int Quanity, string PartDescription, decimal Price)
@@ -30,6 +30,7 @@ namespace Polly_Payroll_Gabriel
             InvoiceNumberGenerator();
             ExtendedPriceGenerator();
         }
+
         private void ExtendedPriceGenerator()
         {
             _extendedPrice = _quanity * _price;

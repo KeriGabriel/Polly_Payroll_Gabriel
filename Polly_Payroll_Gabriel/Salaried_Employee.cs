@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Polly_Payroll_Gabriel
 {
-    internal class Salaried_Employee : Employee
+    internal class Salaried_Employee : Employee  
     {
         private decimal _weeklyWage;
         public Salaried_Employee
@@ -16,11 +16,12 @@ namespace Polly_Payroll_Gabriel
         {
             _weeklyWage = weeklyWage;
         }
+        public override decimal GetPayableAmount => _weeklyWage;
         public override string ToString()
         {
-            return "\n" + base.ToString()
-                        + "\nSalary Earned: "
-                        + _weeklyWage.ToString("C");                      
+            return base.ToString()
+                        + " Weekly Salary Earned: "
+                        + _weeklyWage.ToString("C") +"\n";                      
         }
     }
 }

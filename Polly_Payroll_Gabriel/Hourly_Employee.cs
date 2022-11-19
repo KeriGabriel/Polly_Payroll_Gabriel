@@ -12,6 +12,7 @@ namespace Polly_Payroll_Gabriel
         private decimal _hourlyWage;
         private int _hoursWorked;
         private decimal _earnings;
+        public override decimal GetPayableAmount => _earnings;
         public Hourly_Employee
             (string firstName, string lastName, string SSNumber,
                  decimal HourlyWage, int HoursWorked)
@@ -19,6 +20,7 @@ namespace Polly_Payroll_Gabriel
         {
             _hourlyWage = HourlyWage;
             _hoursWorked = HoursWorked;
+            generate_PayableAmount();
         }
         private string generate_PayableAmount()
         {
@@ -30,8 +32,8 @@ namespace Polly_Payroll_Gabriel
         }
         public override string ToString()
         {
-            return "\n" + base.ToString() + "\n Hourly wage Salary: " + _hourlyWage.ToString("c")
-                + "\n Hours Worked: " + _hoursWorked + "\n Earned: " + generate_PayableAmount() + "\n";
+            return base.ToString() + " Hourly wage: " + _hourlyWage.ToString("c")
+                + "\n Hours Worked: " + _hoursWorked + "\n Earned: " + _earnings + "\n";
         }
     }
 }

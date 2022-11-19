@@ -4,12 +4,22 @@ using System.Runtime.CompilerServices;
 
 bool IsRunning = true;
 decimal weeklyInvoiceTotal = 0;
+decimal _hourlyWeeklyPayout =0;
+decimal _InvoiceWeeklyPayout = 0;
+decimal _salariedWeeklyPayout = 0;
+
 
 List<IPayable> Invoicelist = new List<IPayable>();
 
 Invoicelist.Add(new Salaried_Employee("John", "Smith", "111-11-1111", 800.5m));
-Invoicelist.Add(new Hourly_Employee("Karen", "Williams", "222-22-2222", 16.75m,40));
+Invoicelist.Add(new Salaried_Employee("Bob", "Smith", "222-11-1111", 600.5m));
+Invoicelist.Add(new Salaried_Employee("Sally", "Smith", "333-11-1111", 1800.5m));
+Invoicelist.Add(new Hourly_Employee("Karen", "Williams", "222-22-2222", 16.75m, 40));
+Invoicelist.Add(new Hourly_Employee("Jill", "Jones", "444-22-2222", 20.55m, 35));
+Invoicelist.Add(new Hourly_Employee("Bill", "Williams", "555-22-2222", 21.00m, 45));
 Invoicelist.Add(new InvoiceItem("2536", 2, "Flux Capacitor", 3655.66m));
+Invoicelist.Add(new InvoiceItem("1568", 3, "Clock", 35.55m));
+Invoicelist.Add(new InvoiceItem("5068", 1, "12 ft Cable", 75m));
 
 
 while (IsRunning)
@@ -19,7 +29,7 @@ while (IsRunning)
  
  bool Menu()
 {
-    Console.WriteLine("Please make a selection \n");
+    Console.WriteLine("\nPlease make a selection \n");
     Console.WriteLine("1. Enter a new Salaried employee \n");
     Console.WriteLine("2. Enter a new Hourly employee \n");
     Console.WriteLine("3. Enter a new Invoive \n");
@@ -40,7 +50,6 @@ while (IsRunning)
         case "4":
             Console.WriteLine("Generate Invoicing \n");
             WeeklyInvoiceGenerator();
-            Console.WriteLine( calculateWeekly());
             return true;
         case "5":
             Console.WriteLine(" Exit Program \n");
@@ -52,22 +61,39 @@ while (IsRunning)
     }
     return true;
 }
-decimal calculateWeekly ()
+void CalculateWeekly ()
 {
-
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < Invoicelist.Count; i++)
     {
-    weeklyInvoiceTotal = Invoicelist[i].GetPayableAmount;
-       return weeklyInvoiceTotal + weeklyInvoiceTotal;
+        weeklyInvoiceTotal = weeklyInvoiceTotal + Invoicelist[i].GetPayableAmount;
+
+        if (Invoicelist[i].GetledgerType == IPayable.PayrollType.Invoice.ToString())
+        {
+            _InvoiceWeeklyPayout = _InvoiceWeeklyPayout + Invoicelist[i].GetPayableAmount;
+        }
+        if (Invoicelist[i].GetledgerType == IPayable.PayrollType.Salaried.ToString())
+        {
+            _salariedWeeklyPayout = _salariedWeeklyPayout + Invoicelist[i].GetPayableAmount;
+        }
+        if (Invoicelist[i].GetledgerType == IPayable.PayrollType.Hourly.ToString())
+        {
+            _hourlyWeeklyPayout = _hourlyWeeklyPayout + Invoicelist[i].GetPayableAmount;
+        }
     }
-    return weeklyInvoiceTotal;
 }
+
 void WeeklyInvoiceGenerator()
 {
     foreach (var item in Invoicelist)
     {
         Console.WriteLine(item);
     }
+    CalculateWeekly();
+    Console.WriteLine("Total Weekly Payout: " + weeklyInvoiceTotal.ToString("c"));
+    Console.WriteLine("Category Breakdown: ");
+    Console.WriteLine(" Invoices: " + _InvoiceWeeklyPayout.ToString("c") 
+                      + "\n Salaried Payroll: "+ _salariedWeeklyPayout.ToString("c")
+                      + "\n Hourly Payroll: " + _hourlyWeeklyPayout.ToString("c"));
 }
 void AddNewHourlyEmployee()
 {
