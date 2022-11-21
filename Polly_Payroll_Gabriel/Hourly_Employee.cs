@@ -33,7 +33,7 @@ namespace Polly_Payroll_Gabriel
         public override string ToString()
         {
             return base.ToString() + " Hourly wage: " + _hourlyWage.ToString("c")
-                + "\n Hours Worked: " + _hoursWorked + "\n Earned: " + _earnings + "\n";
+                + "\n Hours Worked: " + _hoursWorked + "\n Earned: " + _earnings.ToString("c") + "\n";
         }
     }
 }

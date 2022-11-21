@@ -48,7 +48,6 @@ while (IsRunning)
             AddNewItem();
             return true;
         case "4":
-            Console.WriteLine("Generate Invoicing \n");
             WeeklyInvoiceGenerator();
             return true;
         case "5":
@@ -84,6 +83,7 @@ void CalculateWeekly ()
 
 void WeeklyInvoiceGenerator()
 {
+    Console.WriteLine("\nWeekly Invoice Payout is as follows:\n");
     foreach (var item in Invoicelist)
     {
         Console.WriteLine(item);

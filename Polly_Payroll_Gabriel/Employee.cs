@@ -35,10 +35,9 @@ namespace Polly_Payroll_Gabriel
         public override string ToString()
 		{
 			return
-				_payrollType + " Employee" 
-                + "\nEmployee first name: " + _firstName
-				+ "\nEmployee last name: " + _lastName
-				+ "\nEmployee SSN: " + _SSNumber + "\n";
+				_payrollType + " Employee: " 
+                 + _firstName + " " + _lastName
+				+ "\n SSN: " + _SSNumber + "\n";
 
         }
 	}
